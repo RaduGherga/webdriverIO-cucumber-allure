@@ -5,20 +5,23 @@ This repository contains end to end tests for [Modus Budget](https://budget.modu
 
 ### Test Plan
 
-[Application to be tested] https://budget.modus.app/  
+***Application to be tested***
+- https://budget.modus.app/  
 
-[Browser] Chrome latest  
+***Browser***
+- Chrome latest  
 
-[Testing type] Automated end to end testing  
+***Testing type*** 
+- Automated end to end testing  
 
-[Testing tools]  
+***Testing tools***
  - Syntax: Javascript
  - Editor: Visual Studio Code
  - BDD Framework: Cucumber
  - Javascript test framework: WebdriverIO
  - Reporting tool: Allure  
 
-[Scenarios]  
+***Scenarios*** 
  - Check that a budget user is able to add income budget which is reflected in 'Total Flow' and in 'Working Balance'
  - Check that a budget user is able to add expense budget which is reflected in 'Total Outflow' and in 'Working Balance'
  - Check that a budget user is able to see budget report with 'Inflow' and 'Outflow'
