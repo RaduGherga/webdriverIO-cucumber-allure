@@ -1,81 +1,42 @@
-[![Coverage Status](https://coveralls.io/repos/github/ModusCreateOrg/budgeting-sample-app-webpack2/badge.svg)](https://coveralls.io/github/ModusCreateOrg/budgeting-sample-app-webpack2) [![CircleCI](https://circleci.com/gh/ModusCreateOrg/budgeting.svg?style=svg)](https://circleci.com/gh/ModusCreateOrg/budgeting)
 
-# Budgeting :: A Modern React, Redux, React Router 4, Webpack Sample App
+### WebdriverIO-cucumber-allure
 
-![React, Redux, Router, Webpack, Sass](https://cloud.githubusercontent.com/assets/733074/25338311/193a1a40-28ff-11e7-8f22-9a5d9dac7b84.png)
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FModusCreateOrg%2Fbudgeting-sample-app-webpack2.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FModusCreateOrg%2Fbudgeting-sample-app-webpack2?ref=badge_shield)
+This repository contains end to end tests for [Modus Budget](https://budget.modus.app/) application. Tests were written with webdriverIO (Selenium - Node.js/JavaScript) projects by using Cucumber framework. Test reports are being generated using Spec and Allure.
 
-Production-ready React + Webpack architecture implemented on consumer web apps of some of the most successful enterprises in the world. Perceived performance and development experience are key factors in this setup. You can use this code base for learning or to scaffold your mission-critical project.
+### Test Plan
 
-[See live demo](https://budget.modus.app/).
+[Application to be tested] https://budget.modus.app/
+[Browser] Chrome latest
+[Testing type] Automated end to end testing
+[Testing tools]
+ - Syntax: Javascript
+ - Editor: Visual Studio Code
+ - BDD Framework: Cucumber
+ - Javascript test framework: WebdriverIO
+ - Reporting tool: Allure
+[Scenarios]
+ - Check that a budget user is able to add income budget which is reflected in 'Total Flow' and in 'Working Balance'
+ - Check that a budget user is able to add expense budget which is reflected in 'Total Outflow' and in 'Working Balance'
+ - Check that a budget user is able to see budget report with 'Inflow' and 'Outflow'
+ - Check that a budget user is able to see budget report based on specific category
+ - Check that a budget user is able to see spending budget report based on category
 
-![React Budgeting App](https://cloud.githubusercontent.com/assets/733074/25340900/6ab1d536-2907-11e7-8083-b78f8ae601b4.png)
+### Installation
 
-## Budgeting Application
-The is a simple budget management application. It tracks inflow and outflow, shows remaining budget, and interesting reports with charts. As such, it offers more features than the usual Todo App. 
+This project is tested on ***Node v6.10.0 to v8.9.0***.  While earlier versions of node may be compatible, they have not been tested or verified.
 
-Budgeting app is a showcase project that demonstrates important decisions in architecture and development of a modern React application.
+`JDK 1.8:` Install JDK 1.8+ and make sure class path is set properly. JAVA is require to start `Selenium Server` nothing else.
 
-Feel free to use it as a reference app or a starter kit.
+`Node.JS:` Install  from the site - https://nodejs.org/en/  take the LTS version based on your Operating system. Please make sure you install NodeJS globally. If you have nvm installed globally, then run `nvm install` to get the latest version of node specified in the`.nvmrc` file [here](/.nvmrc).  If you don't use nvm, be sure that you are using a compatible version. Further details on nvm can be found on the official [github page](https://github.com/creationix/nvm). MAC OSX users are best suited to install nvm with homebrew `brew install nvm`.
 
-## Key concepts:
+Once installation is done - open terminal (MAC OSX) or command prompt (for windows OS) and type below command to verify NodeJS has been installed properly.
 
-- [x] [Webpack 3 Tree shaking](http://moduscreate.com/webpack-2-tree-shaking-configuration/)
-- [x] [PRPL pattern](https://www.slideshare.net/grgur/prpl-pattern-with-webpack-and-react) with minimal application core
-- [x] Automatic code splitting with React Router 4 and `import()` statement
-- [x] Automatic common chunk bundling
-- [x] CSS modules
-- [x] Snapshot testing with Jest
-- [x] Flow static typing. Check out this [guide to using Flow in the project](https://github.com/ModusCreateOrg/budgeting-sample-app-webpack2/blob/master/docs/flow.md).
-- [x] Performance budgets in Webpack 3
-- [x] React 16 Error Boundaries
+        node --version
+        npm --version
 
-## Performance
-![Budgeting App Performance](https://cloud.githubusercontent.com/assets/733074/25339194/1af94448-2902-11e7-8982-c1a9b647fac0.png)
-_The app loads in 1 second on 3G, cache disabled_
+Above command should print out the version that you have installed.
 
-Budgeting app is **blazing fast**, thanks to the smart architecture and Webpack 3 configuration. It takes about 1000ms (1s) to load on 3G (see above).
-
-![Alex Russel Test](https://cloud.githubusercontent.com/assets/733074/25586449/acf14628-2e9f-11e7-8839-2f7c20809581.png)
-_Emerging Markets 3G Filmstrip_
-
-The [aggressive test](https://www.webpagetest.org/video/compare.php?tests=170501_0S_XQ5-r:2-c:0) above shows the budgeting app loads in under 5 seconds. It's a heavily limited connection that accounts for poor connectivity and limited bandwidth. 
-
-![Waterfall](https://cloud.githubusercontent.com/assets/733074/25586623/676a378a-2ea0-11e7-9342-c040751b6ec6.png)
-
-All important (aka critical path) assets are loaded as early as possible, while the others (e.g. images or GitHub buttons) will load after the first render.
-
-#### How did we get that performance?
-
-1. **Minimal application core.** We decided to ditch the usual convention of creating a vendor chunk. Instead, it's bundled in the app core. The app core is actually very small, containing just the code needed to bootstrap the app.
-2. **Common code is a chunk.** We let Webpack figure out which bundles we reuse in chunks and create a common chunk that's also asyncronous. 
-3. **Redux module injection**. Each chunk contains respective views _and_ redux modules. Yes, that means reducers, action creators, actions - are all dynamically injected as we navigate through routes. That adds to the _minimal application core_ concept and PRPL pattern. 
-4. **H2 Push.** The app is hosted on Firebase and we use the magic of _HTTP2 Push_ to push some of the scripts before they are requested.
-5. **Pre-caching**. Service Workers pre-cache resources so the browser can access them as soon as the user needs to.
-
-## Charts
-Charts are developed using the awesome D3 library. The idea behind showing charts is not only to show beautiful content, but also to demonstrate keeping heavy content in a chunk that owns it. In other words - we show how applications can run fast even if they use larger libraries.
-
-D3 is used in the `/reports` route only. Given that major routes are separate chunks (code splitting FTW!), the entire D3 library is bundled with the code that needs it. That makes the `/reports` route a bit heavier than the initial `/budget` route, but it also makes routes much faster to load.
-
-## Performance Budgets
-We are looking to maintain the lightest possible application core (_aka entry chunk_). Our target is 300kB for the entrypoint and 300kB for all other assets. This is how we set it in [webpack configuration](https://github.com/ModusCreateOrg/budgeting-sample-app-webpack2/blob/master/webpack.config.js):
-
-```js
-performance: {
-  maxAssetSize: 300000,
-  maxEntrypointSize: 300000,
-  hints: 'warning',
-},
-```
-
-Adding lots of extra code to the entry chunk might cause the build (`yarn run build`) process to show a warning.
-
-![Performance Budgets](https://cloud.githubusercontent.com/assets/733074/25352700/3ade5cfa-292d-11e7-8d2e-fed88c2c4da0.png)
-
-_Simulated size warning_
-
-Note that running webpack dev server in production mode (`yarn run prod`) will trigger this warning because of the additional dev server code injected in the app. This code will not show in regular production builds.
+Now navigate to the framework's package.json folder and run `npm install` to grab all dependencies.
 
 ## Service Workers
 Service workers are enabled only when serving static files, not through webpack-dev-server. Here's how you can test service worker functionality:
@@ -83,86 +44,119 @@ Service workers are enabled only when serving static files, not through webpack-
 2. Run `yarn run serve` (or `npm run serve`) to serve the app on [localhost:3000](http://localhost:3000)
 3. Run a new instance of Chrome with disabled security (because localhost is not on https): 
 
-**OS X**
+### Selenium
 
-```bash
-open -a "Google Chrome" --args --user-data-dir=/tmp/unsafe --unsafely-treat-insecure-origin-as-secure=http://localhost
+  To run your test You must have selenium / Appium server up and running to execute any WebdriverIO tests, or it will fail fast with an error. There are two ways you can run selenium.
+
+  Once all the node dependency modules are installed (through `npm install`) then for development, you can run  `npm run selenium-postinstall` followed by `npm run selenium-start` if you wish to start it manually else you can use `services: ['selenium-standalone'],` in .conf.js to start it automatically which has been added as part of this project. That's all there is to it.!. Please note that this step is only one time activity at the initial framework set up. Alternatively you can also use below options to start the selenium server.
+
+  1. Install Selenium (selenium-standalone) through NPM (this is the recommended way to install) as you can use it as a services in your framework without worrying to start the selenium server manually. Please note that you follow this below step if `selenium-standalone` package in not been installed through package manager. If you are behind a specific proxy, then in that case you need to set environment variables:
+
+      On OSX:
+
+              NODE_TLS_REJECT_UNAUTHORIZED=0 selenium-standalone install
+
+              NODE_TLS_REJECT_UNAUTHORIZED=0 selenium-standalone start
+
+        On Windows:
+
+              setx NODE_TLS_REJECT_UNAUTHORIZED 0
+
+  sudo npm install selenium-standalone@latest -g
+
+  sudo selenium-standalone install
+
+  selenium-standalone start
+
+  OR
+
+  2. Download the latest selenium standalone server version: and then for example
+    $ java -jar selenium-server-standalone-3.4.0.jar. This option is require if you have not done the step No-1. Else ignore it. this is the other way of doing.
+
+  Note: While installing through sudo command - you need to provide System admin password. On windows don't use `sudo`
+
+### Run Tests
+
+To execute the entire test suite in local development, you can use any one of the options mentioned below
+
+Option 1: `npm run test`
+
+<!-- Option 2: `grunt webdriver:test`.  This executes all features in the [`./e2e/features/*.feature`]  directory with a Spec reporter by default and references the `suite.yourSpecific.conf.js` file. Refer to the ./test/config of cucumber-bdd -->
+
+### Config Files
+
+WebdriverIO uses configuration files to setup and execute tests in specific ways.  The configuration is fully customizable, and different functions can be invoked before, during and after each test or test suite.  Config files can be found in the `/e2e/config/` directory and all end with `*.conf.js`.  These can be called via the the cli
+
+### Reporters
+
+WebdriverIO uses several different types of test reporters to communicate pass/failure.  
+
+##### Spec
+
+Test reporter, that prints detailed results to console.
+
+##### Allure
+
+The Allure Reporter creates [Allure](http://allure.qatools.ru/) test reports which is an HTML generated website with all necessary information to debug your test results and take a look on error screenshots. Add allure to the reporters array in config file and define the output directory of the allure reports.
+
+To generate and view an allure report locally, run `npm run allure-report`.
+
+Allure has several other reporting tools optimized for the CI server of your choice.  You can [view the documentation here](http://wiki.qatools.ru/display/AL/Reporting).
+
+### Develop automation scripts
+
+You can write test either by using Cucumber BDD framework or Jasmine BDD framework. You can choose javascript based design pattern or ES6 based. This project is ES6 friendly (via babel-register)
+
+Refer complete [WebdriverIO API](http://webdriver.io/api.html) methods to write your automation tests.
+
+##### Using Cucumber JavaScript framework
+
+Tests are written in the Cucumber framework using the Gherkin Syntax. More about Gherkin & Cucumber can be found at https://cucumber.io/docs/reference
+
+Tests are place in `*.feature` files in the `/e2e/features/` directory. A typical test will look similar to this:
+```
+Feature: Test if the user is able to add expense or income
+
+    As a budgeting app user I want to add an a new income into my budget
+
+    Background:
+        Given I am on budget page
+
+    Scenario Outline: New added budget should be displayed correctly with total amount being updated
+        Given I have selected category <category>
+        And I added description <description>
+        And I added value <value>
+        When I click on add button
+        Then I should see that new budget with "Description" = <description> has been added
+        And I should see that new budget with amount of <value> is reflected into my working balance
+
+
+        Examples:
+            | category | description | value |
+            | "Income" | "Salary"    | 2000  |
+            | "Car"    | "Repair"    | -1000 |
+
 ```
 
-**Linux**
+### The Page Object Design Pattern
 
-```bash
-/path/to/chrome --user-data-dir=/tmp/unsafe --unsafely-treat-insecure-origin-as-secure=http://localhost
-```
+Within your web app's UI there are areas that your tests interact with. A Page Object simply models these as objects within the test code. This reduces the amount of duplicated code and means that if the UI changes, the fix need only be applied in one place. In other wards one of the challenges of writing test automation is keeping your [selectors] (classes, id's, or xpath' etc.) up to date with the latest version of your code.  The next challenge is to keep the code you write nice and DRY (Don't Repeat Yourself).  The page object pattern helps us accomplish this in one solution.  Instead of including our selectors in our step definitions(in cucumber) or in Spec file (in Jasmine or Mocha), we instead place them in a `<pagename>.js` file where we can manage all these selectors and methods together. Your test file should only call the test methods.
 
-**Windows**
+You can also place reusable functions or logic inside of these pages and call them from your step files. The page object serves as a layer of abstraction between tests and code.  When A test fails, it fails on a individual step.  That step may call a selector that is no longer valid, but that selector may be used by many other steps.  By having a single source of truth of what the selector is supposed to be, fixing one selector on the page object could repair a number of failing tests that were affected by the same selector.
 
-```bash
-chrome.exe --user-data-dir=c:\temp --unsafely-treat-insecure-origin-as-secure=http://localhost
-```
+An object called `Page` will be created with the prototype model or by ES6 class pattern.  This ensures that every instance of a page object is exported as a stateless construct. Any any changes to that state are handled in the browser, rather than on the server.
 
-4. Now you can observe network traffic in the Network tab or SW activity in Application > Service Workers in Developer Tools
+It is preferable to separate page objects into individual files that end with `.page.js`.  These will require the basic `page.js` prototype construct / abstract class and create new objects for each individual page. For more information on the implementation, refer to the `/e2e/pages` directory.
 
-## Stack
-The app was built using these aweseome technologies
+### Contribution
 
-- [x] [Webpack 3.5](https://webpack.github.io)
-- [x] [React 16.x](https://facebook.github.io/react/)
-- [x] [Redux 3.7](http://redux.js.org/)
-- [x] [React Router 4](https://reacttraining.com/react-router/)
-- [x] [Reselect](https://github.com/reactjs/reselect/)
-- [x] [Babel](https://babeljs.io/)
-- [x] [Prettier](https://github.com/prettier/prettier)
-- [x] [Jest](https://facebook.github.io/jest/)
-- [x] [Flow](https://flow.org/en/)
-- [x] [Yarn](https://yarnpkg.com/en/)
-- [x] [Ducks](https://github.com/erikras/ducks-modular-redux/) 🐣
-- [x] [Sass](http://sass-lang.com/)
-- [x] [Autoprefixer](https://github.com/postcss/autoprefixer)
-- [x] [D3](https://d3js.org/)
+Create a fork of the project into your own repository. Make all your necessary changes and create a pull request with a description on what was added or removed and details explaining the changes in lines of code. If approved, project owners will merge it.
 
-## Yarn Scripts
+### History
 
-* `yarn` - install dependencies
-* `yarn start` - run development server
-* `yarn run prod` - run production server
-* `yarn run build` - build app for deployment
-* `yarn run serve` - serve previously built app using pushstate server
-* `yarn run lint` - lint check
-* `yarn run lint:fix` - lint check + autofixes + prettify code with __prettier__
-* `yarn run test` - run test suite
-* `yarn run test:fix` - run test suite watching files for changes
-* `yarn run flow` - run flow type checking
-* `yarn run update-types` - update flow library definitions
-
-## NPM Scripts
-Similar to Yarn, really...
-
-* `npm install` - install dependencies
-* `npm start` - run development server
-* `npm run prod` - run production server
-* `npm run build` - build app for deployment
-* `npm run serve` - serve previously built app using pushstate server
-* `npm run lint` - lint check
-* `npm run lint:fix` - lint check + autofixes + prettify code with __prettier__
-* `npm run test` - run test suite
-* `npm run test:fix` - run test suite watching files for changes
-* `npm run flow` - run flow type checking
-* `npm run update-types` - update flow library definitions
-
-## Honorary Mentions
-
-* Thanks to [React experts at Modus Create](https://moduscreate.com), particularly [Tim Eagan](https://twitter.com/TimothyEagan), [Jason Malfatto](https://twitter.com/jmalfatto), [Brice Mason](https://twitter.com/bricemason), and [Esteban Las](https://twitter.com/elas78) for infinite amounts of experience poured into this app
-* Kudos to [Andrea Grisogono](https://twitter.com/scrumolina) who Scrumorganized the team
-* Thanks to community contributors who helped with code and screamed about issues. Yeah, we really do appreciate all the screaming. 
-* [Addy Osmani](https://twitter.com/addyosmani) and [Sam Saccone](https://twitter.com/samccone) who helped with the PRPL pattern
-* [Sean T Larkin](https://twitter.com/thelarkinn) who helped with Webpack wizardry
-
-## Want more?
-This project is maintained by [Modus Create](https://moduscreate.com). Fantastic React apps are in our DNA so give us a buzz if we can help with your awesome project.
-
-## License
-[MIT](License.md)
+Industry is moving towards Node.js / JavaScript, Angularjs, Full-Stack world. WebdriverIO, a JavaScript binding wrapper for Selenium Webdriver, was originated by Camilo Tapia's initial Selenium project called WebdriverJS, which was the first Webdriver project on NPM. In 2014, the project was renamed WebdriverIO later on. This repository is a pre-configured version of webdriverIO meant to jump-start the process of writing new test automation or adding test automation to existing node.js applications.
 
 
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FModusCreateOrg%2Fbudgeting-sample-app-webpack2.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FModusCreateOrg%2Fbudgeting-sample-app-webpack2?ref=badge_large)
+### Licensing
+
+MIT
