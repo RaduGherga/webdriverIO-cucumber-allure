@@ -155,8 +155,8 @@ An object called `Page` will be created with the prototype model or by ES6 class
 
 It is preferable to separate page objects into individual files that end with `.page.js`.  These will require the basic `page.js` prototype construct / abstract class and create new objects for each individual page. For more information on the implementation, refer to the `/e2e/pages` directory.
 ### Contributors
-[WebdriverIO-with-CucumberBDD] https://github.com/amiya-pattnaik/webdriverIO-with-cucumberBDD
-[ModusCreateOrg/Budgeting] https://github.com/ModusCreateOrg/budgeting
+[WebdriverIO-with-CucumberBDD](https://github.com/amiya-pattnaik/webdriverIO-with-cucumberBDD)  
+[ModusCreateOrg/Budgeting](https://github.com/ModusCreateOrg/budgeting)
 ### Licensing
 
 MIT
